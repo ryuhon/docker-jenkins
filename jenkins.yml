@@ -1,7 +1,7 @@
 version: '3.4'
 services:
   master:
-    image: ryuhon/docker-jenkins:latest
+    image: docker-jenkins:latest
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /usr/bin/docker:/usr/bin/docker
