@@ -1,0 +1,30 @@
+version: '3.4'
+services:
+  master:
+    image: ryuhon/docker-jenkins:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+      - /jenkins_data_folder_host:/var/jenkins_home
+    networks:
+      - frontend
+    environment:
+      - JENKINS_OPTS="--prefix=/jenkins"
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+      labels:
+        - "traefik.backend.loadbalancer.sticky=false"
+        - "traefik.backend.loadbalancer.swarm=true"
+        - "traefik.backend=jenkins_master"
+        - "traefik.docker.network=frontend"
+        - "traefik.entrypoints=https"
+        - "traefik.frontend.passHostHeader=true"
+        - "traefik.frontend.rule=Host:your.jenkins.domain"
+        - "traefik.port=8080"
+
+networks:
+  frontend:
