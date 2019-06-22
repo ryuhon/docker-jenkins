@@ -5,6 +5,8 @@ http://pragmaticstory.com/?p=113 글을 참조해서 빌드.
 
 docker-compose파일은 docker swarm 과 treafik 환경에서 사용할수 있음. 
 
+jenkins 의 Excute Shell 에서 sudo 로 docker 실행가능. 
+
 # How To Build 
 
 ```
